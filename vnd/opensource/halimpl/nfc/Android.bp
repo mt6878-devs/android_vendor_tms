@@ -1,0 +1,65 @@
+//
+// Copyright (C) 2018-2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+subdirs = [
+    "THN31",
+]
+
+cc_binary {
+    name: "android.hardware.nfc@1.2-service-tms",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+    init_rc : ["1.2/android.hardware.nfc@1.2-service-tms.rc"],
+    vintf_fragments: ["vendor.tms.hardware.nfc.xml"],
+    relative_install_path: "hw",
+    cflags: [
+         "-Wall",
+         "-Werror",
+         "-Wextra",
+         "-fexceptions",
+     ],
+
+    srcs: [
+        "1.2/TmsNfcService.cpp",
+        "1.2/Nfc.cpp",
+        "1.2/NfcCompat.cpp",
+        "THN31/extns/impl/tmsnfc/1.0/TmsNfc.cpp",
+    ],
+
+    shared_libs: [
+        "nfc_nci.thn31nfc.tms",
+        "libbase",
+        "libcutils",
+        "libdl",
+        "libhardware",
+        "liblog",
+        "libutils",
+        "android.hardware.nfc@1.0",
+        "android.hardware.nfc@1.1",
+        "android.hardware.nfc@1.2",
+        "libhidlbase",
+        "vendor.tms.tmsnfc@1.0",
+        "tms-utils",
+    ],
+
+    local_include_dirs: [
+        "THN31/halimpl/common",
+        "THN31/halimpl/hal",
+        "THN31/halimpl/inc",
+        "THN31/halimpl/log",
+        "THN31/halimpl/tml",
+        "THN31/halimpl/utils",
+        "THN31/extns/impl/tmsnfc/1.0",
+    ],
+}

@@ -1,0 +1,2 @@
+2c395c6026740256ad43ffe5588682f13d56f3e626ef1e4664bf7e088b1aca26 vendor.tms.tmsnfc@1.0::types
+2d29d205510e7e11a76ba895b366054ebcdda8578079450e3ac2bddc2868d53e vendor.tms.tmsnfc@1.0::ITmsNfc

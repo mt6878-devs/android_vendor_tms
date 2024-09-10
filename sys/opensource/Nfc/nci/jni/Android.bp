@@ -1,0 +1,108 @@
+// Copyright (C) 2023 Tsingteng MicroSystem
+//
+// All rights are reserved. Reproduction in whole or in part is
+// prohibited without the written consent of the copyright owner.
+//
+// Tsingteng reserves the right to make changes without notice at any time.
+//
+// Tsingteng makes no warranty, expressed, implied or statutory, including but
+// not limited to any implied warranty of merchantability or fitness for any
+// particular purpose, or that the use will not infringe any third party patent,
+// copyright or trademark. Tsingteng must not be liable for any loss or damage
+// arising from its use.
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_library_shared {
+    name: "libtmsnfc_nci_jni",
+
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Wno-unused-parameter",
+        "-Werror",
+        // #ifdef TMS_NFC
+        "-Wno-error=date-time",
+        // #endif
+        "-DNXP_UICC_ENABLE",
+        "-DTMS_NFC",
+    ],
+
+    srcs: ["**/*.cpp"],
+    exclude_srcs: ["NfcTagTest.cpp"],
+
+    include_dirs: [
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/nfa/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/nfc/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/gki/ulinux",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/gki/common",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/utils/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/tms",
+    ],
+
+    shared_libs: [
+        "libnativehelper",
+        "libcutils",
+        "libutils",
+        "liblog",
+        "libtmsnfc-nci",
+        "libchrome",
+        "libbase",
+        "libstatslog_nfc_tms",
+    ],
+
+    static_libs: ["libxml2"],
+
+    product_variables: {
+        debuggable: {
+            cflags: [
+                "-DDCHECK_ALWAYS_ON",
+                "-DDTA_ENABLED"
+            ],
+        },
+    },
+    sanitize: {
+        integer_overflow: true,
+        misc_undefined: ["bounds"],
+        scs: true,
+    },
+}
+/*
+cc_test {
+    name: "tms_nfc.nci.jni.tests",
+
+    cflags: [
+        "-DTMS_NFC",
+    ],
+
+    srcs: ["NfcTagTest.cpp"],
+
+    shared_libs: [
+        "libtmsnfc-nci",
+        "libtmsnfc_nci_jni",
+        "libstatslog_nfc_tms",
+    ],
+
+    static_libs: [
+        "libgmock",
+        "libgtest",
+    ],
+
+    header_libs: [
+        "jni_headers"
+    ],
+
+    include_dirs: [
+        "vendor/tms/sys/opensource/Nfc/nci/jni",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/gki/common",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/gki/ulinux",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/nfa/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/src/nfc/include",
+        "vendor/tms/sys/opensource/libtmsnfc-nci/utils/include",
+    ],
+}
+*/

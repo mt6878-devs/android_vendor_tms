@@ -1,0 +1,4 @@
+Notes relating to hidl2aidl conversion of vendor.tms.tmsnfc@1.0 to vendor.tms.tmsnfc (if any) follow:
+ITmsNfc: Consider replacing char with int if signed integer is desired
+ITmsNfc: Consider replacing char with int if signed integer is desired
+END OF LOG

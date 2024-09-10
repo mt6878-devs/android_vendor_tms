@@ -1,0 +1,19 @@
+# Copyright (C) 2022 Tsingteng MicroSystem
+#
+# All rights are reserved. Reproduction in whole or in part is
+# prohibited without the written consent of the copyright owner.
+#
+# Tsingteng reserves the right to make changes without notice at any time.
+#
+# Tsingteng makes no warranty, expressed, implied or statutory, including but
+# not limited to any implied warranty of merchantability or fitness for any
+# particular purpose, or that the use will not infringe any third party patent,
+# copyright or trademark. Tsingteng must not be liable for any loss or damage
+# arising from its use.
+
+
+
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += vendor/tms/common/config/device_framework_matrix.xml
+#DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += vendor/tms/common/config/device_framework_matrix.xml
+
+

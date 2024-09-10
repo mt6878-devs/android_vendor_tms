@@ -1,0 +1,45 @@
+// Copyright (C) 2021-2023 Tsingteng MicroSystem
+//
+// All rights are reserved. Reproduction in whole or in part is
+// prohibited without the written consent of the copyright owner.
+//
+// Tsingteng reserves the right to make changes without notice at any time.
+//
+// Tsingteng makes no warranty, expressed, implied or statutory, including but
+// not limited to any implied warranty of merchantability or fitness for any
+// particular purpose, or that the use will not infringe any third party patent,
+// copyright or trademark. Tsingteng must not be liable for any loss or damage
+// arising from its use.
+
+bootstrap_go_package {
+    name: "soong-condition_android_bp",
+    pkgPath: "android/soong/condition_android_bp",
+    deps: [
+        "soong-android",
+        "soong-cc",
+    ],
+    srcs: [
+          "condition_android_bp.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_cond_se_bin {
+    name: "cond_se_bin",
+}
+
+cc_cond_7816_lib {
+    name: "cond_7816_lib",
+}
+
+cc_cond_tms_dl_common_lib {
+    name: "cond_tms_dl_common_lib",
+}
+
+cc_cond_tms_dl_ree_lib {
+    name: "cond_tms_dl_ree_lib",
+}
+
+cc_cond_tms_dl_tee_lib {
+    name: "cond_tms_dl_tee_lib",
+}

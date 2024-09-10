@@ -1,0 +1,42 @@
+cc_binary {
+    name: "android.hardware.nfc-service-tms",
+    relative_install_path: "hw",
+    init_rc: ["nfc-service-tms.rc"],
+    vintf_fragments: ["nfc-service-tms.xml"],
+    //vendor: true,
+    proprietary: true,
+    cflags: [
+        "-Wall",
+        "-Wextra",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libutils",
+        "libbinder_ndk",
+        "android.hardware.nfc-V1-ndk",
+        "nfc_nci.thn31nfc.tms",
+        "libhardware",
+        "libhardware_legacy",
+        "vendor.tms.tmsnfc_aidl-V1-ndk",
+        "tms-utils",
+        "libcutils",
+    ],
+    srcs: [
+        "service.cpp",
+        "Nfc.cpp",
+        "NfcCompat.cpp",
+        "extns/impl/nfc/1/TmsNfc.cpp"
+    ],
+    include_dirs: [
+        "vendor/tms/vnd/opensource/halimpl/nfc/THN31/halimpl/common",
+        "vendor/tms/vnd/opensource/halimpl/nfc/THN31/halimpl/hal",
+        "vendor/tms/vnd/opensource/halimpl/nfc/THN31/halimpl/inc",
+        "vendor/tms/vnd/opensource/halimpl/nfc/THN31/halimpl/log",
+        "vendor/tms/vnd/opensource/halimpl/nfc/THN31/halimpl/tml",
+        "vendor/tms/vnd/opensource/halimpl/nfc/THN31/halimpl/utils",
+    ],
+    local_include_dirs: [
+        "extns/impl/nfc/1",
+    ],
+}

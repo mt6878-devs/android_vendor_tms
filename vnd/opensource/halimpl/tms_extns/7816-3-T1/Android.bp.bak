@@ -1,0 +1,90 @@
+// Copyright (C) 2021 Tsingteng MicroSystem
+//
+// All rights are reserved. Reproduction in whole or in part is
+// prohibited without the written consent of the copyright owner.
+//
+// Tsingteng reserves the right to make changes without notice at any time.
+//
+// Tsingteng makes no warranty, expressed, implied or statutory, including but
+// not limited to any implied warranty of merchantability or fitness for any
+// particular purpose, or that the use will not infringe any third party patent,
+// copyright or trademark. Tsingteng must not be liable for any loss or damage
+// arising from its use.
+
+bootstrap_go_package {
+    name: "soong-condition_android_bp",
+    pkgPath: "android/soong/condition_android_bp",
+    deps: [
+        "soong-android",
+        "soong-cc",
+    ],
+    srcs: [
+          "condition_android_bp.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_cond_library {
+    name: "cond_defaults",
+}
+
+cc_library_shared {
+
+    name: "7816-3-T1",
+    defaults: [
+        "hidl_defaults",
+        "cond_defaults",
+    ],
+    proprietary: true,
+
+    srcs: [
+        "utils/*.c",
+        "utils/*.cc",
+        "ph-driver/*.c",
+        "config/*.cc",
+        "7816/*.c",
+        "adaptation/*.cpp",
+        "cos-dl/src/*.cpp",
+    ],
+
+    local_include_dirs: [
+        "cos-dl/inc",
+        "adaptation/include",
+    ],
+
+    export_include_dirs: [
+        "cos-dl/inc",
+        "include",
+    ],
+
+    include_dirs: [
+        //"vendor/tms/secure_element/7816-3-T1/adaptation/include",
+    ],
+
+    cflags: [
+        "-DANDROID",
+        "-DBUILDCFG=1",
+        "-Wall",
+        "-Werror",
+        "-Wno-error=date-time",
+        "-Wno-date-time",
+
+        "-DDBG_LEVEL_STACK",
+        //"-DDBG_LEVEL_1",
+        "-DUSE_SPI_SPLIT_READ",
+        "-DLRC_CRC_0",
+        "-DI2C_TMP_PATCH",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "libutils",
+        "liblog",
+        "libbase",
+        "android.hardware.nfc@1.0",
+
+        "libutilscallstack",
+    ],
+}

@@ -1,0 +1,32 @@
+// This is the expected build file, but it may not be right in all cases
+
+aidl_interface {
+    name: "vendor.tms.tmsese_aidl",
+    vendor_available: true,
+    srcs: ["vendor/tms/tmsese_aidl/*.aidl"],
+    stability: "vintf",
+    owner: "tms",
+    backend: {
+        cpp: {
+            // FIXME should this be disabled?
+            // prefer NDK backend which can be used anywhere
+            // If you disable this, you also need to delete the C++
+            // translate code.
+            enabled: false,
+        },
+        java: {
+            sdk_version: "module_current",
+            enabled: true,
+        },
+        ndk: {
+            enabled: true,
+        },
+    },
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+
+}

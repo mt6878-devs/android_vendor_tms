@@ -1,0 +1,54 @@
+// Copyright (C) 2021-2022 Tsingteng MicroSystem
+//
+// All rights are reserved. Reproduction in whole or in part is
+// prohibited without the written consent of the copyright owner.
+//
+// Tsingteng reserves the right to make changes without notice at any time.
+//
+// Tsingteng makes no warranty, expressed, implied or statutory, including but
+// not limited to any implied warranty of merchantability or fitness for any
+// particular purpose, or that the use will not infringe any third party patent,
+// copyright or trademark. Tsingteng must not be liable for any loss or damage
+// arising from its use.
+
+cc_library_shared {
+    name: "tms-utils",
+
+    owner: "tms",
+    vendor : true,
+    //vndk: {
+    //    enabled: true,
+    //},
+
+    srcs: [
+        "*.c",
+        "*.cc",
+        "*.cpp",
+    ],
+
+    local_include_dirs: [
+        "include",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    cflags: [
+        "-DANDROID",
+        "-DBUILDCFG=1",
+        "-Wall",
+        "-Werror",
+        "-Wno-error=date-time",
+        "-Wno-date-time",
+
+        "-DUSE_TMS_NFC",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "libutils",
+        "liblog",
+        "libbase",
+    ],
+}

@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2021 Tsingteng MicroSystem
+ *
+ * All rights are reserved. Reproduction in whole or in part is
+ * prohibited without the written consent of the copyright owner.
+ *
+ * Tsingteng reserves the right to make changes without notice at any time.
+ *
+ * Tsingteng makes no warranty, expressed, implied or statutory, including but
+ * not limited to any implied warranty of merchantability or fitness for any
+ * particular purpose, or that the use will not infringe any third party patent,
+ * copyright or trademark. Tsingteng must not be liable for any loss or damage
+ * arising from its use.
+ */
+
+package vendor.tms.tmsese@1.0;
+
+interface ITmsEse {
+    /*
+     * Performs an action based on the ioctlType.
+     *
+     *
+     * @return action performs result.
+     */
+    doAction(uint64_t ioctlType)  generates (int16_t status);
+
+    /*
+     * @Function seInit
+     *
+     * @Description This function initializes 7816-3-T1 protocol's variables
+     *
+     * @params      initMode - init mode for normal OMA or download mode
+     *
+     * @returns     This function return ESESTATUS_SUCCES (0) in case of success.
+     *
+     */
+    sInit()  generates (int16_t status);
+
+    /*
+     * @Function seDeInit
+     *
+     * @Description  This function deinitializes the ESE interface and free all resources.
+     *
+     * @returns      ESESTATUS_SUCCESS Always return ESESTATUS_SUCCESS (0).
+     *
+     */
+    sDeinit()  generates (int16_t status);
+
+    /*
+     * @Function seReset
+     *
+     * @Description  This function reset the SE, such as: N(S), chain flag, etc.
+     *
+     * @returns      ESESTATUS_SUCCESS is successful
+     *
+     */
+    sReset()  generates (int16_t status);
+
+    /**
+     * Transmits an APDU command (as per ISO/IEC 7816) to the SE.
+     *
+     * @param data APDU command to be sent
+     * @return response to the command. In case of error in communicating with
+     *                  the secure element, an empty vector is returned.
+     */
+    transmit(vec<uint8_t> data) generates (vec<uint8_t> response);
+
+    /**
+     * Returns Answer to Reset as per ISO/IEC 7816
+     *
+     * @return response containing the response. Empty vector if Secure Element
+     *                  doesn't support ATR.
+     */
+    sGetAtr() generates (vec<uint8_t> response);
+};

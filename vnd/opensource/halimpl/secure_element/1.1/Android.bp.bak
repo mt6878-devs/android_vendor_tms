@@ -1,0 +1,35 @@
+// Copyright (C) 2021 Tsingteng MicroSystem
+//
+// All rights are reserved. Reproduction in whole or in part is
+// prohibited without the written consent of the copyright owner.
+//
+// Tsingteng reserves the right to make changes without notice at any time.
+//
+// Tsingteng makes no warranty, expressed, implied or statutory, including but
+// not limited to any implied warranty of merchantability or fitness for any
+// particular purpose, or that the use will not infringe any third party patent,
+// copyright or trademark. Tsingteng must not be liable for any loss or damage
+// arising from its use.
+
+cc_binary {
+    name: "android.hardware.secure_element@1.1-service-tms",
+    defaults: ["hidl_defaults"],
+    proprietary: true,  
+    init_rc: ["android.hardware.secure_element@1.1-service-tms.rc"],
+    relative_install_path: "hw",
+    srcs: [
+        "*.cpp",
+    ],
+
+    shared_libs: [
+        "android.hardware.secure_element@1.0",
+        "android.hardware.secure_element@1.1",
+        "libbase",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "7816-3-T1",
+    ],
+}
