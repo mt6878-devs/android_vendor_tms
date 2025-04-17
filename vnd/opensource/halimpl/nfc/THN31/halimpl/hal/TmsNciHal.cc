@@ -673,9 +673,9 @@ NFCSTATUS tmsNciHalOpen(nfc_stack_callback_t *pCallback,
         //        property_set("tms.nfc.secos.download", "null");
         //      }
         //    }
-        if (gIsHalAidlService) {
+       // if (gIsHalAidlService) {
             tmsNciHalOpenComplete(configStatus);
-        }
+        //}
         return NFCSTATUS_SUCCESS;
     } else if ((*getTmsNciHalCtrl()).halStatus == HAL_STATUS_CLOSE) {
         memset(&*getTmsNciHalCtrl(), 0x00, sizeof(*getTmsNciHalCtrl()));
@@ -1555,7 +1555,12 @@ static void tmsNciHalCoreInitializedComplete(NFCSTATUS status) {
  ******************************************************************************/
 int tmsNciHalPreDiscover(void) {
     /* Nothing to do here for initial version */
-    return NFCSTATUS_FAILED;
+	if (gIsHalAidlService) {
+            return NFCSTATUS_FAILED;
+    }else{
+			return NFCSTATUS_SUCCESS;
+	}
+    
 }
 
 /******************************************************************************
@@ -1851,6 +1856,7 @@ int tmsNciHalPowerCycle(void) {
         TMSLOG_NCIHAL_D("Power Cycle failed due to hal status not open");
         return NFCSTATUS_FAILED;
     }
+	(*getTmsNciHalCtrl()).powerResetTriggered = true;
     status = tmlNfcIoCtl(TMLNFC_POWER_RESET);
 
     if (NFCSTATUS_SUCCESS == status) {

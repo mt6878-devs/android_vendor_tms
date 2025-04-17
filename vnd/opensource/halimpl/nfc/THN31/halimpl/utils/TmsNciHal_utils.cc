@@ -497,9 +497,13 @@ void tmsNciHalEmergencyRecovery(uint8_t status) {
             abort();
         }
         case CORE_RESET_TRIGGER_TYPE_POWERED_ON: {
-            if ((*getTmsNciHalCtrl()).halOpenStatus == true) {
+            if ((*getTmsNciHalCtrl()).halOpenStatus == true &&
+			    (*getTmsNciHalCtrl()).powerResetTriggered == false) {
                 TMSLOG_NCIHAL_E("abort()");
                 abort();
+            }
+            if ((*getTmsNciHalCtrl()).powerResetTriggered == true) {
+                (*getTmsNciHalCtrl()).powerResetTriggered = false;
             }
         }
         break;

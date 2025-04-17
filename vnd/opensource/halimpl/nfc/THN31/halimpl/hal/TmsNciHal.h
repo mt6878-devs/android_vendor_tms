@@ -147,6 +147,7 @@ typedef struct TmsNciHalControl {
     TmsNciHalInfo_t nciInfo;
     uint8_t halBootMode;
     NfcChipType chipType;
+	bool_t powerResetTriggered;
 
     bool readyToShutdown;
 } TmsNciHalControl_t;
